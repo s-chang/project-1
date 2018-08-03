@@ -115,7 +115,7 @@ public class ReplyDao {
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
-			while(!rs.next()) {
+			while(rs.next()) {
 				int id = rs.getInt("r_id");
 				Timestamp time = rs.getTimestamp("r_datetime");
 				String user = rs.getString("r_userName");

@@ -2,7 +2,7 @@ package com.Rev.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+//import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet{
 		res.setContentType("text/html");
 		pw.print("signup.html");
 		pw.close();
-		System.out.println("Get success");
+		//System.out.println("Get success");
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet{
 		PersonDao pd = new PersonDao();
 		ObjectMapper mapper = new ObjectMapper();
 		DummyUser p = mapper.readValue(req.getInputStream(), DummyUser.class);
-		List<Person> peeps= pd.getAll();
+		//List<Person> peeps= pd.getAll();
 		boolean found = pd.checkUser(p);
 		PrintWriter pw = res.getWriter();
 		
@@ -66,11 +66,11 @@ public class LoginServlet extends HttpServlet{
 			pw.close();			
 		}		
 		
-		System.out.println("Made it to the Servlet");
-		System.out.println(p.getP_username() + " " + p.getP_password());
-		for(Person a : peeps) {
-			System.out.println(a.toString());
-		}
-		System.out.println(found);
+		//System.out.println("Made it to the Servlet");
+		//System.out.println(p.getP_username() + " " + p.getP_password());
+		//for(Person a : peeps) {
+			//System.out.println(a.toString());
+		//}
+		//System.out.println(found);
 	}	
 }

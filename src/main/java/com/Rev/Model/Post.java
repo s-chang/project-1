@@ -4,6 +4,11 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 
 public class Post {
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", date=" + date + ", userName=" + userName + ", title=" + title + ", post=" + post
+				+ ", image=" + image + ", flag=" + flag + "]";
+	}
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -23,8 +28,7 @@ public class Post {
 	private String userName;
 	private String title;
 	private String post;
-	private Blob image;
-	
+	private Blob image;	
 	private int flag;
 	
 	public int getId() {

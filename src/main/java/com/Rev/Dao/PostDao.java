@@ -17,6 +17,7 @@ public class PostDao {
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
+			conn.setAutoCommit(false);
 			String sql = "DELETE FROM POST WHERE po_userName = ? AND po_datetime = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, p.getUserName());
@@ -36,6 +37,7 @@ public class PostDao {
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
+			conn.setAutoCommit(false);
 			String sql = "DELETE FROM POST WHERE po_userName = ? AND po_datetime = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, userName);
@@ -112,19 +114,27 @@ public class PostDao {
 			String sql = "SELECT * FROM POST";
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+			System.out.println("in getAll()");
 			
-			while(!rs.next()) {
+			while(rs.next()) {
+				System.out.println("Entered loop");
 				int id = rs.getInt("po_id");
+				System.out.println(id);
 				Timestamp date = rs.getTimestamp("po_datetime");
+				System.out.println(date.toString());
 				String userName = rs.getString("po_userName");
+				System.out.println(userName);
 				String title = rs.getString("po_title");
+				System.out.println(title);
 				String post = rs.getString("po_post");
+				System.out.println(post);
 				Blob image = rs.getBlob("po_image");
-				
+				//System.out.println(image.toString());
 				int flag = rs.getInt("po_flag");
+				System.out.println(flag);				
 				
-				p = new Post(id, date, userName, title, post, image,  flag);				
-				
+				p = new Post(id, date, userName, title, post, image, flag);				
+				System.out.println(p.toString());
 				posts.add(p);
 			}
 			rs.close();
@@ -147,7 +157,7 @@ public class PostDao {
 			ps.setString(1, user);
 			ResultSet rs = ps.executeQuery();
 			
-			while(!rs.next()) {
+			while(rs.next()) {
 				int id = rs.getInt("po_id");
 				Timestamp date = rs.getTimestamp("po_datetime");
 				String uName = rs.getString("po_userName");
@@ -180,14 +190,13 @@ public class PostDao {
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery(); 
 			
-			while(!rs.next()) {
+			while(rs.next()) {
 				int id = rs.getInt("po_id");
 				Timestamp date = rs.getTimestamp("po_datetime");
 				String uName = rs.getString("po_userName");
 				String title = rs.getString("po_title");
 				String post = rs.getString("po_post");
-				Blob image = rs.getBlob("po_image");
-				
+				Blob image = rs.getBlob("po_image");				
 				int flag = rs.getInt("po_flag");
 				
 				p = new Post(id, date, uName, title, post, image, flag);
@@ -212,7 +221,7 @@ public class PostDao {
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
-			while(!rs.next()) {
+			while(rs.next()) {
 				int id = rs.getInt("po_id");
 				Timestamp date = rs.getTimestamp("po_datetime");
 				String uName = rs.getString("po_userName");
